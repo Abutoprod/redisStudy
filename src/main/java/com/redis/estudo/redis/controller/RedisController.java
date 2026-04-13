@@ -22,13 +22,13 @@ public class RedisController {
     @PostMapping("/save")
     public String savePerformance(@RequestParam String key
                                 , @RequestParam String value
-                                , @RequestParam Integer expirationTimeInSeconds) {
-        redisServices.savePerformance(key, value, expirationTimeInSeconds); // Define um tempo de expiração de 60 segundos para a chave
+                                , @RequestParam Integer expiration) {
+        redisServices.savePerformance(key, value, expiration); // Define um tempo de expiração de 60 segundos para a chave
         return "Dados salvos no Redis com a chave: " + key;
     }
 
-    @GetMapping("/get")
-    public String getPerformance(@PathVariable String key) {
+    @GetMapping("/get/{key}")
+    public Object get(@PathVariable String key) {
         String value = (String) redisServices.getPerformance(key);
         if ("null".equals(value) || value.isEmpty()) {
             return "Nenhum valor encontrado no Redis para a chave: " + key;

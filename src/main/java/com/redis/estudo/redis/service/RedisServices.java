@@ -11,7 +11,7 @@ public class RedisServices {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired  // Injeção do RedisTemplate para operações Redis
+      
     public void savePerformance(String key, Object value, Integer expirationTimeInSeconds) {
        // Salva o valor no Redis usando a chave fornecida
         redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(expirationTimeInSeconds)); // Define um tempo de expiração de 60 segundos para a chave
