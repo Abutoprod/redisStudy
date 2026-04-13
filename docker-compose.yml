@@ -9,6 +9,8 @@ services:
     environment:
       - SPRING_DATA_REDIS_HOST=redis-lab
       - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_RABBITMQ_USERNAME=abuto
+      - SPRING_RABBITMQ_PASSWORD=tr4ptr1x
   
   rabbitmq:
     image: rabbitmq:4-management
@@ -17,9 +19,9 @@ services:
       - "5672:5672" # Porta para comunicação com a aplicação
       - "15672:15672" # Porta para acessar a interface de gerenciamento do RabbitMQ
     environment:
-      - RABBITMQ_DEFAULT_USER: abuto
-      - RABBITMQ_DEFAULT_PASS: tr4ptr1x
-    restart: always
+      - RABBITMQ_DEFAULT_USER=abuto
+      - RABBITMQ_DEFAULT_PASS=tr4ptr1x
+   
 
   redis-lab:
     image: redis:latest
