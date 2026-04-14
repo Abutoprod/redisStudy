@@ -79,5 +79,21 @@ public class RedisController {
         java.util.List<Object> history = redisServices.getRecentHistory("history_list", limit);
         return ResponseEntity.ok(history);
     }
+
+        @RestController
+        @RequestMapping("/api/test")
+        public class LoadTestController {
+
+            @Autowired
+            private RedisController redisController;
+
+            @GetMapping("/stress")
+            public String stressTest() {
+                for (int i = 0; i < 1000; i++) {
+                    redisController.savePerformance("Teste de carga item " + i);
+                }
+                return "Disparadas 1000 mensagens para a fila!";
+            }
+        }
         
 }
