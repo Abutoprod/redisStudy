@@ -10,4 +10,6 @@ WORKDIR /app
 # Copia apenas o .jar gerado no estágio anterior
 COPY --from=build /app/target/*.jar /app/
 EXPOSE 8080
+# Cria o diretório e dá permissão total
+RUN mkdir -p /app/data && chmod 777 /app/data
 ENTRYPOINT ["sh", "-c", "java -jar /app/*.jar"]

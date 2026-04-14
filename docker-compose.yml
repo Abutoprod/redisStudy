@@ -1,5 +1,29 @@
 services:
-  redis-estudos:
+  app-java:
+    build: .
+    container_name: java-redis-app
+    ports:
+      - "8081:8081" # Mapeia a porta 8081 do seu PC para a 8081 do container
+    depends_on:
+      - redis-lab
+    environment:
+      - SPRING_DATA_REDIS_HOST=redis-lab
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_RABBITMQ_USERNAME=abuto
+      - SPRING_RABBITMQ_PASSWORD=tr4ptr1x
+  
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq-lab
+    ports:
+      - "5672:5672" # Porta para comunicação com a aplicação
+      - "15672:15672" # Porta para acessar a interface de gerenciamento do RabbitMQ
+    environment:
+      - RABBITMQ_DEFAULT_USER=abuto
+      - RABBITMQ_DEFAULT_PASS=tr4ptr1x
+   
+
+  redis-lab:
     image: redis:latest
     container_name: redis-lab
     ports:
