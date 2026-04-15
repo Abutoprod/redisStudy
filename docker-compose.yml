@@ -6,11 +6,18 @@ services:
       - "8081:8081" # Mapeia a porta 8081 do seu PC para a 8081 do container
     depends_on:
       - redis-lab
+      - rabbitmq
+    deploy:
+      resources:
+          limits:
+            cpus: '0.5' # Limita o uso da CPU a 50%
+            memory: 512M # Limita o uso de memória a 512MB
     environment:
       - SPRING_DATA_REDIS_HOST=redis-lab
       - SPRING_DATA_REDIS_PORT=6379
       - SPRING_RABBITMQ_USERNAME=abuto
       - SPRING_RABBITMQ_PASSWORD=tr4ptr1x
+      - JAVA_OPTS=-Xmx512m -Xms256m # Configura opções de memória para a JVM
   
   rabbitmq:
     image: rabbitmq:4-management

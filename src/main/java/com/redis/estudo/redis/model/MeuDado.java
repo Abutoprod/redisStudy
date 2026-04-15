@@ -14,7 +14,7 @@ public class MeuDado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String chave; // Armazena a chave do Redis
+    private String chave; 
     
     @Column(columnDefinition = "TEXT") // Define a coluna como TEXT para armazenar grandes quantidades de texto (como JSON)
     private String conteudo; // Armazena o conteúdo dos dados (pode ser JSON ou string)
