@@ -12,4 +12,4 @@ COPY --from=build /app/target/*.jar /app/
 EXPOSE 8080
 # Cria o diretório e dá permissão total
 RUN mkdir -p /app/data && chmod 777 /app/data
-ENTRYPOINT ["sh", "-c", "java -jar /app/*.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/*.jar"]
